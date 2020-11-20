@@ -18,7 +18,7 @@ namespace MeramecNetFlixProject
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            Application.Run(new GenreForm());
+            Application.Run(new MovieForm());
         }
     }
 }

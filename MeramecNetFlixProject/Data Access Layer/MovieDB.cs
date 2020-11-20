@@ -10,24 +10,24 @@ using System.Data;
 
 namespace MeramecNetFlixProject.Data_Access_Layer
 {
-    public static class GenreDB
+    public static class MovieDB
     {
         private static string GetConnectionString()
         {
             string connectionString = "Server=mc-sluggo.stlcc.edu;Database=IS253_Schulte;User Id=schulte;Password=schulte;";
             return connectionString;
         }
-        public static List<Genre> GetGenres()
+        public static List<Movie> GetMovies()
         {
-            List<Genre> genreList = new List<Genre>();
+            List<Movie> movieList = new List<Movie>();
             string connectionString = GetConnectionString();
-            string sqlString= "select id, name from Genre";
+            string sqlString = "select movie_number, movie_title, description, movie_year_made, genre_id, movie_rating, image, rental_duration, trailer from Movie";
 
             try
             {
                 using (IDbConnection db = new SqlConnection(connectionString))
                 {
-                    genreList = db.Query<Genre>(sqlString).ToList();
+                    movieList = db.Query<Movie>(sqlString).ToList();
                 }
             }
             catch (Exception ex)
@@ -35,22 +35,22 @@ namespace MeramecNetFlixProject.Data_Access_Layer
                 throw ex;
             }
 
-            return genreList;
+            return movieList;
         }
-        public static Genre GetGenre(int genreID)
+        public static Movie GetMovie(int movieNumber)
         {
-            Genre myGenre;
+            Movie myMovie;
 
             string connectionString = GetConnectionString();
-            string sqlString = "select id, name from genre where id = @genre_id";
+            string sqlString = "select movie_number, movie_title, description, movie_year_made, genre_id, movie_rating, image, rental_duration, trailer from movie where movie_number = @movie_number";
 
             try
             {
                 using (IDbConnection db = new SqlConnection(connectionString))
                 {
                     DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("@genre_id", genreID, DbType.Int32, ParameterDirection.Input);
-                    myGenre = db.QuerySingleOrDefault<Genre>(sqlString, parameters);
+                    parameters.Add("@movie_number", movieNumber, DbType.Int32, ParameterDirection.Input);
+                    myMovie = db.QuerySingleOrDefault<Movie>(sqlString, parameters);
                 }
             }
             catch (Exception ex)
@@ -58,22 +58,29 @@ namespace MeramecNetFlixProject.Data_Access_Layer
                 throw ex;
             }
 
-            return myGenre;
+            return myMovie;
         }
-        public static bool AddGenre(Genre objGenre)
+        public static bool AddMovie(Movie objMovie)
         {
             int rowsAffected = 0;
             bool returnStatus;
             string connectionString = GetConnectionString();
-            string sqlString = "insert into Genre values (@genre_id, @genre_name)";
+            string sqlString = "insert into Movie values (@movie_number, @movie_title, @description, @movie_year_made, @genre_id, @movie_rating, @image, @rental_duration, @trailer)";
 
             try
             {
                 using (IDbConnection db = new SqlConnection(connectionString))
                 {
                     DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("@genre_id", objGenre.id, DbType.Int32, ParameterDirection.Input);
-                    parameters.Add("@genre_name", objGenre.name, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@movie_number", objMovie.movie_number, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@movie_title", objMovie.movie_title, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@description", objMovie.description, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@movie_year_made", objMovie.movie_year_made, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@genre_id", objMovie.genre_id, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@movie_rating", objMovie.movie_rating, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@image", objMovie.image, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@rental_duration", objMovie.rental_duration, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@trailer", objMovie.trailer, DbType.String, ParameterDirection.Input);
                     rowsAffected = db.Execute(sqlString, parameters);
                 }
             }
@@ -84,22 +91,22 @@ namespace MeramecNetFlixProject.Data_Access_Layer
             returnStatus = rowsAffected > 0 ? true : false;
             return returnStatus;
         }
-        public static bool UpdateGenre(Genre objGenre)
+        public static bool UpdateMovie(Movie objMovie)
         {
             int rowsAffected = 0;
             bool returnStatus;
             string connectionString = GetConnectionString();
-            string sqlString = "update Genre " +
-                               " set name = @genre_name " +
-                               " where id = @genre_id ";
+            string sqlString = "update Movie " +
+                               " set name = @Movie_name " +
+                               " where id = @Movie_id ";
 
             try
             {
                 using (IDbConnection db = new SqlConnection(connectionString))
                 {
                     DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("@genre_id", objGenre.id, DbType.Int32, ParameterDirection.Input);
-                    parameters.Add("@genre_name", objGenre.name, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@movie_id", objMovie.movie_number, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@movie_name", objMovie.movie_title, DbType.String, ParameterDirection.Input);
                     rowsAffected = db.Execute(sqlString, parameters);
                 }
             }
@@ -110,19 +117,19 @@ namespace MeramecNetFlixProject.Data_Access_Layer
             returnStatus = rowsAffected > 0 ? true : false;
             return returnStatus;
         }
-        public static bool DeleteGenre(Genre objGenre)
+        public static bool DeleteMovie(Movie objMovie)
         {
             int rowsAffected = 0;
             bool returnStatus;
             string connectionString = GetConnectionString();
-            string sqlString = "delete Genre where id = @genre_id";
+            string sqlString = "delete Movie where id = @Movie_id";
 
             try
             {
                 using (IDbConnection db = new SqlConnection(connectionString))
                 {
                     DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("@genre_id", objGenre.id, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@Movie_id", objMovie.movie_number, DbType.Int32, ParameterDirection.Input);
                     rowsAffected = db.Execute(sqlString, parameters);
                 }
             }
@@ -133,6 +140,5 @@ namespace MeramecNetFlixProject.Data_Access_Layer
             returnStatus = rowsAffected > 0 ? true : false;
             return returnStatus;
         }
-
     }
 }
