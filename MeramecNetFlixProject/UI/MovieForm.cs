@@ -19,6 +19,10 @@ namespace MeramecNetFlixProject.UI
             InitializeComponent();
             cmbGenre.DataSource = GenreDB.GetGenres();
             cmbGenre.DisplayMember = "name";
+            cmbGenre.SelectedIndex = -1;
+            cmbGenre.Text = "--Select--";
+            cmbMovieRating.Text = "--Select--";
+            cmbRentalDuration.Text = "--Select--";
         }
 
 
@@ -274,7 +278,6 @@ namespace MeramecNetFlixProject.UI
             MessageBox.Show("In order to run this demo, please update your SQL Server connection string in the MovieDB Data Access Layer GetConnectionString method.", "MeramecNetFlix", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             

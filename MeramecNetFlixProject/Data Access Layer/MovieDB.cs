@@ -122,14 +122,14 @@ namespace MeramecNetFlixProject.Data_Access_Layer
             int rowsAffected = 0;
             bool returnStatus;
             string connectionString = GetConnectionString();
-            string sqlString = "delete Movie where id = @Movie_id";
+            string sqlString = "delete Movie where movie_number = @Movie_number";
 
             try
             {
                 using (IDbConnection db = new SqlConnection(connectionString))
                 {
                     DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("@Movie_id", objMovie.movie_number, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@Movie_number", objMovie.movie_number, DbType.Int32, ParameterDirection.Input);
                     rowsAffected = db.Execute(sqlString, parameters);
                 }
             }
