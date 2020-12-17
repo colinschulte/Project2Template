@@ -59,5 +59,25 @@ namespace MeramecNetFlixProject.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stlcc_icon_dark_blue {
+            get {
+                object obj = ResourceManager.GetObject("stlcc-icon-dark-blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap STLCC_Stacked_Logo_Blue_RGB_SML {
+            get {
+                object obj = ResourceManager.GetObject("STLCC_Stacked_Logo_Blue_RGB_SML", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

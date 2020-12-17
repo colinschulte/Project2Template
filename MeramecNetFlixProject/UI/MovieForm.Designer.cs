@@ -268,16 +268,17 @@
             // 
             this.cmbMovieRating.FormattingEnabled = true;
             this.cmbMovieRating.Items.AddRange(new object[] {
-            "G",
-            "PG",
+            "G    ",
+            "PG   ",
             "PG-13",
-            "R",
+            "R    ",
             "NC-17",
-            "N/R"});
+            "N/R  "});
             this.cmbMovieRating.Location = new System.Drawing.Point(256, 133);
             this.cmbMovieRating.Name = "cmbMovieRating";
             this.cmbMovieRating.Size = new System.Drawing.Size(121, 24);
             this.cmbMovieRating.TabIndex = 24;
+            this.cmbMovieRating.SelectedIndexChanged += new System.EventHandler(this.cmbMovieRating_SelectedIndexChanged);
             // 
             // cmbRentalDuration
             // 

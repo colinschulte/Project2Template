@@ -13,12 +13,22 @@ using MeramecNetFlixProject.Data_Access_Layer;
 
 namespace MeramecNetFlixProject.UI
 {
-    public partial class Form1 : Form
+    public partial class SplashForm : Form
     {
-        public Form1()
+        public SplashForm()
         {
             InitializeComponent();
             
+        }
+        private void SplashForm_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            new WelcomeForm().Show();
+            this.Hide();
         }
     }
 }

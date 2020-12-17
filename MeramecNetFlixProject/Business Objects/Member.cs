@@ -10,7 +10,7 @@ namespace MeramecNetFlixProject.Business_Objects
     {
         public string member_status { get; set; }
         public int member_number { get; set; }
-        public string joindate { get; set; }
+        public DateTime joindate { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string zipcode { get; set; }

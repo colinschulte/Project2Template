@@ -97,16 +97,26 @@ namespace MeramecNetFlixProject.Data_Access_Layer
             bool returnStatus;
             string connectionString = GetConnectionString();
             string sqlString = "update Movie " +
-                               " set name = @Movie_name " +
-                               " where id = @Movie_id ";
+                               "set movie_title = @movie_title, description = @description, " +
+                               "movie_year_made = @movie_year_made, genre_id = @genre_id, " +
+                               "movie_rating = @movie_rating, image = @image, " + 
+                               "rental_duration = @rental_duration, trailer = @trailer " +
+                               "where movie_number = @movie_number ";
 
             try
             {
                 using (IDbConnection db = new SqlConnection(connectionString))
                 {
                     DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("@movie_id", objMovie.movie_number, DbType.Int32, ParameterDirection.Input);
-                    parameters.Add("@movie_name", objMovie.movie_title, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@movie_number", objMovie.movie_number, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@movie_title", objMovie.movie_title, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@description", objMovie.description, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@movie_year_made", objMovie.movie_year_made, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@genre_id", objMovie.genre_id, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@movie_rating", objMovie.movie_rating, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@image", objMovie.image, DbType.String, ParameterDirection.Input);
+                    parameters.Add("@rental_duration", objMovie.rental_duration, DbType.Int32, ParameterDirection.Input);
+                    parameters.Add("@trailer", objMovie.trailer, DbType.String, ParameterDirection.Input);
                     rowsAffected = db.Execute(sqlString, parameters);
                 }
             }

@@ -93,8 +93,6 @@ namespace MeramecNetFlixProject.UI
         }
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            
-
             try
             {
                 List<Movie> myMovieList = new List<Movie>();
@@ -245,8 +243,7 @@ namespace MeramecNetFlixProject.UI
                 rtbDescription.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                 txtMovieYearMade.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
                 cmbGenre.SelectedIndex = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[4].Value);
-                //TODO: get movie rating working
-                cmbMovieRating.SelectedItem = dataGridView1.SelectedRows[0].Cells[5].Value;
+                cmbMovieRating.SelectedItem = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
                 if (dataGridView1.SelectedRows[0].Cells[6].Value != null)
                 {
                     txtImage.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
@@ -281,6 +278,11 @@ namespace MeramecNetFlixProject.UI
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
+        }
+
+        private void cmbMovieRating_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
